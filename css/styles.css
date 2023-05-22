@@ -11,6 +11,7 @@
   --background-color-dark: #2e2f42;
   --border-btn: #e7e9fc;
   --color-icon-customers-border: #8e8f99;
+  --transition-value: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .list {
@@ -103,6 +104,7 @@ img {
   gap: 40px;
 }
 .menu-link {
+  position: relative;
   display: block;
   padding-top: 24px;
   padding-bottom: 24px;
@@ -112,11 +114,23 @@ img {
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--secondary-text-color);
+  transition: color var(--transition-value);
 }
 .menu-link:hover,
 .menu-link:focus {
   color: var(--hover-focus-color);
 }
+.highlighting-the-active-page::after {
+  position: absolute;
+  display: block;
+  content: '';
+  background-color: var(--hover-focus-color);
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  margin-top: 20px;
+}
+
 .contacts {
   font-style: normal;
   margin-left: auto;
@@ -134,6 +148,7 @@ img {
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--primary-text-color);
+  transition: color var(--transition-value);
 }
 
 /* Hero section */
@@ -183,6 +198,7 @@ img {
   letter-spacing: 0.04em;
   color: var(--text-color-theme-dark-secondary);
   background: var(--accent-color);
+  transition: background-color var(--transition-value);
 }
 .btn-order:hover,
 .btn-order:focus {
@@ -305,6 +321,7 @@ img {
   height: 40px;
   border-radius: 50%;
   background-color: var(--accent-color);
+  transition: background-color var(--transition-value);
 }
 .social-link:hover,
 .social-link:focus {
@@ -332,6 +349,8 @@ img {
   border: 1px solid #8e8f99;
   border-radius: 4px;
   color: var(--color-icon-customers-border);
+  transition: color var(--transition-value),
+    border-color var(--transition-value);
 }
 .customers-icon {
   fill: currentColor;
@@ -390,6 +409,7 @@ img {
   height: 40px;
   border-radius: 50%;
   background-color: var(--accent-color);
+  transition: background-color var(--transition-value);
 }
 .soc-media-link:hover,
 .soc-media-link:focus {
@@ -414,6 +434,48 @@ img {
 .soc-media-icon {
   fill: var(--text-color-theme-dark);
 }
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 47, 66, 0.4);
+
+  transition: opacity 500ms linear;
+}
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 408px;
+  height: 584px;
+  background-color: #fcfcfc;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.modal-close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding-left: 0;
+  padding-right: 0;
+  background-color: var(--border-btn);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
 
 /* Portfolio */
 
@@ -425,11 +487,13 @@ img {
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
-  align-items: center;
   text-align: center;
   letter-spacing: 0.04em;
   color: var(--accent-color);
   background-color: var(--background-color-light);
+  transition: background-color var(--transition-value),
+    color var(--transition-value), box-shadow var(--transition-value),
+    border var(--transition-value);
 }
 .btn-filter:hover,
 .btn-filter:focus {
@@ -486,9 +550,31 @@ img {
 }
 .projects-link {
   display: block;
+  transition: box-shadow var(--transition-value);
 }
 .projects-link:hover,
 .projects-link:focus {
   box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px 32px 164px;
+  background-color: var(--accent-color);
+  color: var(--text-color-theme-dark);
+  transform: translateY(100%);
+  transition: transform var(--transition-value);
+}
+.projects-list-img-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.projects-link:hover .overlay,
+.projects-link:focus .overlay {
+  transform: translateY(0);
 }
